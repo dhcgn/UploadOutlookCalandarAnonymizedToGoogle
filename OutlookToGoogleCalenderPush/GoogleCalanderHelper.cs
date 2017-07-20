@@ -40,7 +40,7 @@ namespace OutlookToGoogleCalenderPush
                     "user",
                     CancellationToken.None,
                     new FileDataStore(credPath, true)).Result;
-                Console.WriteLine("Credential file saved to: " + credPath);
+                Console.WriteLine("    Credential file saved to: " + credPath);
             }
 
             // Create Google Calendar API service.
@@ -74,7 +74,7 @@ namespace OutlookToGoogleCalenderPush
                     },
                 }, calendarId);
                 var newEvent = temp.Execute();
-                Console.Out.WriteLine($"New Event: {newEvent.Id}");
+                Console.Out.WriteLine($"    ADD: {newEvent.Summary} ({newEvent.Id})");
             }
 
         }
@@ -90,7 +90,6 @@ namespace OutlookToGoogleCalenderPush
 
             // List events.
             Events events = request.Execute();
-            Console.WriteLine("Upcoming events:");
             if (events.Items != null && events.Items.Count > 0)
             {
                 foreach (var eventItem in events.Items)
@@ -100,7 +99,7 @@ namespace OutlookToGoogleCalenderPush
                     {
                         when = eventItem.Start.Date;
                     }
-                    Console.WriteLine($"{eventItem.Summary} ({when}) {eventItem.Start.TimeZone} - {eventItem.Id} - {eventItem.RecurringEventId}");
+                    Console.WriteLine($"    DELETE: {eventItem.Summary} ({when}) {eventItem.Start.TimeZone} - {eventItem.Id}");
 
                     var delete = service.Events.Delete(calendarId, eventItem.Id);
                     delete.Execute();
@@ -108,7 +107,7 @@ namespace OutlookToGoogleCalenderPush
             }
             else
             {
-                Console.WriteLine("No upcoming events found.");
+                Console.WriteLine("    No upcoming events found.");
             }
         }
 
@@ -131,7 +130,7 @@ namespace OutlookToGoogleCalenderPush
                     {
                         when = eventItem.Start.Date;
                     }
-                    Console.WriteLine($"DELETE: {eventItem.Summary} ({when}) {eventItem.Start.TimeZone} - {eventItem.Id} - {eventItem.RecurringEventId}");
+                    Console.WriteLine($"    DELETE: {eventItem.Summary} ({when}) {eventItem.Start.TimeZone} - {eventItem.Id} - {eventItem.RecurringEventId}");
 
                     var delete = service.Events.Delete(calendarId, eventItem.Id);
                     delete.Execute();
@@ -139,7 +138,7 @@ namespace OutlookToGoogleCalenderPush
             }
             else
             {
-                Console.WriteLine("No upcoming events found.");
+                Console.WriteLine("    No upcoming events found.");
             }
         }
 

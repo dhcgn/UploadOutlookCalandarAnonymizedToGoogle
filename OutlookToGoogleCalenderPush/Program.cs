@@ -12,10 +12,12 @@ namespace OutlookToGoogleCalenderPush
 
         private static void Main(string[] args)
         {
+            EmbeddedLibsResolver.Init();
+
             if (args != null && args.Length == 1 && args[0].Equals("GetCalender", StringComparison.InvariantCultureIgnoreCase))
                 GetCalender();
 
-            if (args != null && args.Length == 2 && args[0].Equals("Sync", StringComparison.InvariantCultureIgnoreCase) && !string.IsNullOrEmpty(args[1]))
+            if (args != null && args.Length == 2 && args[0].Equals("Sync", StringComparison.InvariantCultureIgnoreCase) && !String.IsNullOrEmpty(args[1]))
                 Sync(args[1]);
 
             Console.Write("Press any key");
@@ -52,11 +54,11 @@ namespace OutlookToGoogleCalenderPush
                 return;
             }
 
-            Log($"Start {nameof(GoogleCalanderHelper.DeleteRecurringGoogleCalenderEvents)}");
-            GoogleCalanderHelper.DeleteRecurringGoogleCalenderEvents(service, id);
-
             Log($"Start {nameof(GoogleCalanderHelper.DeleteGoogleCalenderEvents)}");
             GoogleCalanderHelper.DeleteGoogleCalenderEvents(service, id);
+
+            Log($"Start {nameof(GoogleCalanderHelper.DeleteRecurringGoogleCalenderEvents)}");
+            GoogleCalanderHelper.DeleteRecurringGoogleCalenderEvents(service, id);
 
             Log($"Start {nameof(GoogleCalanderHelper.AddEventToGoogleCalender)}");
             GoogleCalanderHelper.AddEventToGoogleCalender(service, result, id);
