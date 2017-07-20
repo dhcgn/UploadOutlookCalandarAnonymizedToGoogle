@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlookToGoogleCalenderPush", "OutlookToGoogleCalenderPush\OutlookToGoogleCalenderPush.csproj", "{2F0665DB-43D1-4CC3-BBC1-12FA8243C6FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlookToGoogleCalendar", "OutlookToGoogleCalenderPush\OutlookToGoogleCalendar.csproj", "{2F0665DB-43D1-4CC3-BBC1-12FA8243C6FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
