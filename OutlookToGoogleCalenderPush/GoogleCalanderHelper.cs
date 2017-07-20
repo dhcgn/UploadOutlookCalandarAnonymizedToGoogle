@@ -18,8 +18,7 @@ namespace OutlookToGoogleCalenderPush
     {
         private const string ApplicationName = "OutlookToGoogleCalenderPush";
         private static readonly string[] Scopes = { CalendarService.Scope.Calendar };
-        private static readonly string Folder = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "SOtoG");
-        private const string CalenderId = "dhcgn.de_dco12ir811bd9q2p5pudd9muio@group.calendar.google.com";
+        private static readonly string Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SOtoG");
 
         public static CalendarService CreateCalendarService()
         {
@@ -54,7 +53,7 @@ namespace OutlookToGoogleCalenderPush
         }
 
 
-        public static void AddEventToGoogleCalender(CalendarService service, List<OutlookHelper.MyEvent> result)
+        public static void AddEventToGoogleCalender(CalendarService service, List<OutlookHelper.MyEvent> result, string calendarId)
         {
             foreach (var myEvent in result)
             {
@@ -73,16 +72,16 @@ namespace OutlookToGoogleCalenderPush
                         DateTime = myEvent.End,
                         TimeZone = "Europe/Berlin"
                     },
-                }, CalenderId);
+                }, calendarId);
                 var newEvent = temp.Execute();
                 Console.Out.WriteLine($"New Event: {newEvent.Id}");
             }
 
         }
 
-        public static void DeleteGoogleCalenderEvents(CalendarService service)
+        public static void DeleteGoogleCalenderEvents(CalendarService service, string calendarId)
         {
-            EventsResource.ListRequest request = service.Events.List(CalenderId);
+            EventsResource.ListRequest request = service.Events.List(calendarId);
             request.TimeMin = DateTime.Now.Date;
             request.ShowDeleted = false;
             request.SingleEvents = true;
@@ -103,7 +102,7 @@ namespace OutlookToGoogleCalenderPush
                     }
                     Console.WriteLine($"{eventItem.Summary} ({when}) {eventItem.Start.TimeZone} - {eventItem.Id} - {eventItem.RecurringEventId}");
 
-                    var delete = service.Events.Delete(CalenderId, eventItem.Id);
+                    var delete = service.Events.Delete(calendarId, eventItem.Id);
                     delete.Execute();
                 }
             }
@@ -114,9 +113,9 @@ namespace OutlookToGoogleCalenderPush
         }
 
 
-        public static void DeleteRecurringGoogleCalenderEvents(CalendarService service)
+        public static void DeleteRecurringGoogleCalenderEvents(CalendarService service, string calendarId)
         {
-            EventsResource.ListRequest request = service.Events.List(CalenderId);
+            EventsResource.ListRequest request = service.Events.List(calendarId);
             request.TimeMin = DateTime.Now.Date;
             request.ShowDeleted = false;
             request.SingleEvents = false;
@@ -134,7 +133,7 @@ namespace OutlookToGoogleCalenderPush
                     }
                     Console.WriteLine($"DELETE: {eventItem.Summary} ({when}) {eventItem.Start.TimeZone} - {eventItem.Id} - {eventItem.RecurringEventId}");
 
-                    var delete = service.Events.Delete(CalenderId, eventItem.Id);
+                    var delete = service.Events.Delete(calendarId, eventItem.Id);
                     delete.Execute();
                 }
             }

@@ -15,7 +15,7 @@ namespace OutlookToGoogleCalenderPush
             if (args != null && args.Length == 1 && args[0].Equals("GetCalender", StringComparison.InvariantCultureIgnoreCase))
                 GetCalender();
 
-            if (args != null && args.Length == 2 && args[0].Equals("Sync", StringComparison.InvariantCultureIgnoreCase) && !String.IsNullOrEmpty(args[1]))
+            if (args != null && args.Length == 2 && args[0].Equals("Sync", StringComparison.InvariantCultureIgnoreCase) && !string.IsNullOrEmpty(args[1]))
                 Sync(args[1]);
 
             Console.Write("Press any key");
@@ -53,13 +53,13 @@ namespace OutlookToGoogleCalenderPush
             }
 
             Log($"Start {nameof(GoogleCalanderHelper.DeleteRecurringGoogleCalenderEvents)}");
-            GoogleCalanderHelper.DeleteRecurringGoogleCalenderEvents(service);
+            GoogleCalanderHelper.DeleteRecurringGoogleCalenderEvents(service, id);
 
             Log($"Start {nameof(GoogleCalanderHelper.DeleteGoogleCalenderEvents)}");
-            GoogleCalanderHelper.DeleteGoogleCalenderEvents(service);
+            GoogleCalanderHelper.DeleteGoogleCalenderEvents(service, id);
 
             Log($"Start {nameof(GoogleCalanderHelper.AddEventToGoogleCalender)}");
-            GoogleCalanderHelper.AddEventToGoogleCalender(service, result);
+            GoogleCalanderHelper.AddEventToGoogleCalender(service, result, id);
         }
 
         private static void GetCalender()
@@ -73,9 +73,7 @@ namespace OutlookToGoogleCalenderPush
             Log("You need to pass the id to sync from outlook to google.");
 
             foreach (var entry in calanderList)
-            {
                 Log($"    Id: {entry.Id} - Summary: {entry.Summary}");
-            }
         }
     }
 }
