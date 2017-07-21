@@ -14,7 +14,7 @@ namespace OutlookToGoogleCalenderPush
         {
             EmbeddedLibsResolver.Init();
 
-            if (args != null && args.Length == 1 && args[0].Equals("GetCalender", StringComparison.InvariantCultureIgnoreCase))
+            if (args != null && args.Length == 1 && args[0].Equals("GetCalendar", StringComparison.InvariantCultureIgnoreCase))
                 GetCalender();
 
             if (args != null && args.Length == 2 && args[0].Equals("Sync", StringComparison.InvariantCultureIgnoreCase) && !String.IsNullOrEmpty(args[1]))
