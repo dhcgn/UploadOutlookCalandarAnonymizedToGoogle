@@ -1,4 +1,4 @@
-# UploadOutlookCalanderAnonymizedToGoogle
+# UploadOutlookCalandarAnonymizedToGoogle
 
 This program reads your events from Outlook for the next 3 months and uploads a very small subset of event information to the employees personal calendar.
 
@@ -38,9 +38,9 @@ In order to build this program you need to create your own client secret from Go
 
 ## Usage
 
-Get all of your calender ids
+Get all of your calendar ids
 
-`file.exe GetCalender`
+`file.exe GetCalendar`
 
 Sync the events from Outlook to this calander (will drop existing events, so you really should use a seperate calander instance)
 
